@@ -52,15 +52,16 @@ for ii in range(10):
 
 # cd /Users/rohitpandey/Documents/github/pyray
 # scene-11
-for i in range(42):
+for i in range(15):
     tt = TsrctCubeTree()
     tt.bfs('000-')
     tt.reset_vert_col()
-    tt.theta = np.pi/20.0*i
+    #tt.theta = np.pi/20.0*i
+    tt.theta = 0.0
     tt.dfs_flatten('000-')
     im = Image.new("RGB", (1024, 1024), (0, 0, 0))
     draw = ImageDraw.Draw(im, 'RGBA')
-    r=rotation(4, np.pi*17/60.0*(i+25)/200.0)
+    r=rotation(4, np.pi*17/60.0*i/10.0)
     tt.plot(draw, r, rgba=(100,100,100,40), shift=np.array([514, 595, 0, 0]),
             scale=105)
     im.save("Images//RotatingCube//im" +
@@ -78,7 +79,7 @@ for i in range(15):
     im = Image.new("RGB", (1024, 1024), (0, 0, 0))
     draw = ImageDraw.Draw(im, 'RGBA')
     r=rotation(4, np.pi*17/60.0*14/10.0)
-    tt.plot(draw, r, rgba=(100,100,100,40), 
+    tt.plot(draw, r, rgba=(100,100,100,40),
             shift=np.array([514, 595, 0, 0]),
             scale=105)
     im.save("Images//RotatingCube//im" +
@@ -87,7 +88,8 @@ for i in range(15):
 
 
 #230617
-# scene-13
+# scene-x
+# All experimentation from here.
 tt = TsrctCubeTree()
 tt.bfs('000-')
 tt.reset_vert_col()
