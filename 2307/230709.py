@@ -96,9 +96,9 @@ for i in range(13):
     draw = ImageDraw.Draw(im, 'RGBA')
     tf = tg.TsrctFcGraph(angle=np.pi/24*i, adj=None)
     tf.draw = draw
-    #tf.r = rotation(4, np.pi*17/60.0*14/10.0)
-    tf.r = np.eye(4)
-    open_given_cube(tf, w_persp=5, i=i, base_fc='00++')
+    tf.r = rotation(4, np.pi*17/60.0*14/10.0)
+    #tf.r = np.eye(4)
+    open_given_cube(tf, w_persp=5, i=i, base_fc='+00+')
     plot_all_faces(tf, tf.draw, tf.r, persp=5,shift=np.array([514, 595, 0, 0]),
             scale=105-i*2.7, rgba=(100,100,100,40))
     #print(105-min(i,21)*2.7)
