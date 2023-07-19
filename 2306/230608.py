@@ -76,6 +76,7 @@ def dull_im(im, ix=3):
     return im
 
 # scene-7
+# Might be misleading. The real scene-7 is in pyray/videos/flatten_4d_cube/make_scene6
 for ii in range(6):
     im = Image.open(r"ryu576_Demonstrating_prespective_projection_with_a_cubical_tunn_b4457cf3-f6b1-4e98-bf23-a63a365b7668.png")
     im = dull_im(im, ii)
