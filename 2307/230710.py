@@ -23,3 +23,5 @@ for i in range(32):
         for k in combinations(np.arange(32),23):
             print("comb")
 
+## Nothing to see here. Check 230714 instead.
+# Choosing an i and j (32*3) vs choosing a j for each i (3^32).

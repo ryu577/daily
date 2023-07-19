@@ -76,7 +76,7 @@ for i in range(22):
 import pyray.shapes.fourd.tesseract_graph as tg
 from pyray.rotation import rotation
 
-def open_given_cube(tf, base_fc='+00+', w_persp=0, i=0):
+def open_given_cube(tf, base_fc='+00+', i=0):
     tf.reset_vert_col()
     tf.dfs_flatten2(base_fc)
     tf.reset_vert_col()
@@ -90,7 +90,6 @@ def open_given_cube(tf, base_fc='+00+', w_persp=0, i=0):
 
 
 #scene-14
-#TODO add colors from previous scenes.
 for i in range(13):
     im = Image.new("RGB", (1024, 1024), (0, 0, 0))
     draw = ImageDraw.Draw(im, 'RGBA')
@@ -107,7 +106,6 @@ for i in range(13):
 
 
 #scene-15
-#TODO add colors from previous scenes.
 for i in range(13):
     im = Image.new("RGB", (1024, 1024), (0, 0, 0))
     draw = ImageDraw.Draw(im, 'RGBA')
@@ -116,8 +114,38 @@ for i in range(13):
     tf.r = rotation(4, np.pi*17/60.0*14/10.0)
     open_given_cube(tf, w_persp=5, i=i)
     plot_all_faces(tf, tf.draw, tf.r, persp=5,shift=np.array([514, 595, 0, 0]),
-            scale=105-(21-i)*2.7, rgba=(100,100,100,40))
+            scale=105-(12-i)*2.7, rgba=(100,100,100,40))
     print(105-min(i,21)*2.7)
     im.save("Images//RotatingCube//im" +
                 str(i).rjust(4, '0') + ".png")
 
+
+## Some scenes being added on 230715
+#scene-16
+for i in range(13):
+    im = Image.new("RGB", (1024, 1024), (0, 0, 0))
+    draw = ImageDraw.Draw(im, 'RGBA')
+    tf = tg.TsrctFcGraph(angle=np.pi/24*(i+24), adj=None)
+    tf.draw = draw
+    tf.r = rotation(4, np.pi*17/60.0*14/10.0)
+    open_given_cube(tf, w_persp=5, i=i)
+    plot_all_faces(tf, tf.draw, tf.r, persp=5,shift=np.array([514, 595, 0, 0]),
+            scale=105, rgba=(100,100,100,40))
+    print(105-min(i,21)*2.7)
+    im.save("Images//RotatingCube//im" +
+                str(i).rjust(4, '0') + ".png")
+
+
+#scene-17
+for i in range(13):
+    im = Image.new("RGB", (1024, 1024), (0, 0, 0))
+    draw = ImageDraw.Draw(im, 'RGBA')
+    tf = tg.TsrctFcGraph(angle=np.pi/24*(i+36), adj=None)
+    tf.draw = draw
+    tf.r = rotation(4, np.pi*17/60.0*14/10.0)
+    open_given_cube(tf, w_persp=5, i=i)
+    plot_all_faces(tf, tf.draw, tf.r, persp=5,shift=np.array([514, 595, 0, 0]),
+            scale=105, rgba=(100,100,100,40))
+    print(105-min(i,21)*2.7)
+    im.save("Images//RotatingCube//im" +
+                str(i).rjust(4, '0') + ".png")
