@@ -258,7 +258,7 @@ for i in range(25):
     plot_hsl(gr, draw, r, shift=np.array([700+i*8, 512-i*8, 0]),
              scale=105*(1-i/70))
     r = np.dot(rr1, r)
-    im.save("Images//RotatingCube//im" + str(i) + ".png")
+    im.save("Images//RotatingCube//im" + str(i).rjust(4, '0') + ".png")
 
 
 # scene-27: First cube gets its cuts.
@@ -288,7 +288,7 @@ for i in range(25):
         for ll in line_dat:
             if j < 1:
                 draw.line(ll, fill=(120, 10, 90, 220), width=5)
-    im.save("Images//RotatingCube//im" + str(i) + ".png")
+    im.save("Images//RotatingCube//im" + str(i).rjust(4, '0') + ".png")
 
 
 
@@ -322,7 +322,7 @@ for i in range(25):
         line_dat = drw_lines(gr, surv, r, shift, scale, p=p)
         for ll in line_dat:
             draw.line(ll, fill=(120, 10, 90, 220), width=5)
-    im.save("Images//RotatingCube//im" + str(i) + ".png")
+    im.save("Images//RotatingCube//im" + str(i).rjust(4, '0') + ".png")
 
 
 
@@ -356,7 +356,7 @@ for i in range(25):
              scale=scale)
         for ll in line_dat:
             draw.line(ll, fill=(120, 10, 90, 220), width=5)
-    im.save("Images//RotatingCube//im" + str(i) + ".png")
+    im.save("Images//RotatingCube//im" + str(i).rjust(4, '0') + ".png")
 
 
 # scene-30: Second cube opening up.
@@ -391,7 +391,7 @@ for i in range(25):
              scale=scale)
         for ll in line_dat:
             draw.line(ll, fill=(120, 10, 90, 220), width=5)
-    im.save("Images//RotatingCube//im" + str(i) + ".png")
+    im.save("Images//RotatingCube//im" + str(i).rjust(4, '0') + ".png")
 
 
 
@@ -429,7 +429,7 @@ for i in range(13):
             plot_hsl(gr, draw, r0, shift=shift,
                 scale=scale)
     r = np.dot(rr1, r)
-    im.save("Images//RotatingCube//im" + str(i) + ".png")
+    im.save("Images//RotatingCube//im" + str(i).rjust(4, '0') + ".png")
 
 
 # scene-32: Bring the two meshes together.
@@ -467,10 +467,10 @@ for i in range(12):
         else:
             plot_hsl(gr, draw, r0, shift=shift,
                 scale=scale)
-    im.save("Images//RotatingCube//im" + str(i) + ".png")
+    im.save("Images//RotatingCube//im" + str(i).rjust(4, '0') + ".png")
 
 
-# Now preparing the count the properties of the Tesseract.
+# Now preparing to count the properties of the Tesseract.
 
 def plot_all_faces(tf, draw, r, persp=0, rgba=(10,31,190,80),
                     shift=np.array([514, 595, 0, 0]),scale=105):
@@ -567,9 +567,8 @@ for i in range(24):
     open_given_cube(tf, i=i)
     plot_all_faces2(tf, tf.draw, tf.r, kk, persp=5,shift=np.array([514, 595, 0, 0]),
             scale=105, rgba=(100,100,100,40))
-    font = ImageFont.truetype("Arial.ttf", 14)
+    font = ImageFont.truetype("Arial.ttf", 25)
     draw.text((700,700), str(i), font=font)
     im.save("Images//RotatingCube//im" +
                 str(i).rjust(4, '0') + ".png")
-
 
