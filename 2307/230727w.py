@@ -48,6 +48,8 @@ def get_av(a, ix, k):
             return 0
         else:
             return p
-    av = p*get_av(a, ix+1, k-pod, n-pod) +\
-        (1-p)*get_av(a, ix+1, k, n-pod)
+    a_1 = get_av(a, ix+1, k-pod, n-pod)
+    a_0 = get_av(a, ix+1, k, n-pod)
+    av = p*a_1 + (1-p)*a_0
     return av
+
