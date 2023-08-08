@@ -9,14 +9,14 @@ fdg = fd%20
 
 rack = fd%5
 aa = {}
-
+vmss_size = 9
 spof = 0
 n_sim = 10000
 for i in range(n_sim):
-    fdgs = np.random.choice(fdg, size=5, replace=False)
+    fdgs = np.random.choice(np.arange(20), size=vmss_size, replace=False)
     racks = rack[fdgs]
     arr = Counter(racks).values()
-    if max(arr) > 2:
+    if max(arr) > vmss_size//2:
         spof += 1
     arr = sorted(arr, reverse=True)
     if str(arr) in aa:
@@ -30,14 +30,14 @@ for kk in aa.keys():
     av1 = get_av(arr, 0, 3)
 
 #########################
-p = 0.6
+p = 0.9
 a = np.array([4,3,3,2,1])
 
 a = sorted(a, reverse=True)
 n = sum(a)
 
 # Original version in 230718w.
-def get_av(a, ix, k):
+def get_av(a, ix, k, n):
     pod = a[ix]
     if k <= 0:
         return 1
