@@ -36,18 +36,21 @@ class VmssPerf():
     def __init__(self, vmss_size=5, p_rack=.99998):
         fd = np.arange(1, 91)
         self.fdg = fd % 20
-        self.rack = fd % vmss_size
+        self.rack = fd % 5
         self.p_rack = p_rack
+        self.vmss_size = vmss_size
         self.aa = {}
 
     def run_sim(self, n_sim=10000):
         spof = 0
         self.n_sim = n_sim
         for i in range(n_sim):
-            fdgs = np.random.choice(np.arange(19), size=5, replace=False)
+            fdgs = np.random.choice(np.arange(19),
+                                    size=self.vmss_size,
+                                    replace=False)
             racks = self.rack[fdgs]
             arr = Counter(racks).values()
-            if max(arr) > 2:
+            if max(arr) > self.vmss_size//2:
                 spof += 1
             arr = sorted(arr, reverse=True)
             if str(arr) in self.aa:
@@ -65,3 +68,10 @@ class VmssPerf():
             av1 = sys.get_av(0, 3)
             av += av1*prcnt
         return av
+
+
+def tst(vmss_size=5, p_rack=.99998):
+    vp = VmssPerf(vmss_size, p_rack)
+    vp.run_sim()
+    vmss_av = vp.get_sys_characteristics()
+    print(vmss_av)
