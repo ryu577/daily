@@ -6,7 +6,7 @@ a = np.array([4,3,3,2,1])
 a = sorted(a, reverse=True)
 n = sum(a)
 
-def get_av(a, ix, k):
+def get_av(a, ix, k, n):
     """
     Gets the availablity percentage of a system where
     replicas are placed in pods, the replicas form a k-of-n system
