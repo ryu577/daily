@@ -4,19 +4,23 @@ import ast
 
 
 # Original version in 230718w.
-def get_av(a, ix, k, n, p):
+def get_av(a, ix, k, p):
+    """
+    This is a tree traversal.
+    """
     pod = a[ix]
+    n = sum(a[ix:])
     if k <= 0:
         return 1
-    elif sum(a[ix:]) < k:
+    elif n < k:
         return 0
     elif ix == len(a) - 1:
-        if k < pod:
+        if k > pod:
             return 0
         else:
             return p
-    a_1 = get_av(a, ix+1, k-pod, n-pod, p)
-    a_0 = get_av(a, ix+1, k, n-pod, p)
+    a_1 = get_av(a, ix+1, k-pod, p)
+    a_0 = get_av(a, ix+1, k, p)
     av = p*a_1 + (1-p)*a_0
     return av
 
@@ -32,28 +36,7 @@ class Sys():
     def get_av(self, k, n=None):
         if n is None:
             n = self.n
-        av = get_av(self.a, 0, k, n, self.p)
-        return av
-
-    def get_av2(self, ix, k, n=None):
-        if n is None:
-            n = self.n
-        if ix == len(self.a)-1:
-            return self.p
-        pod = self.a[ix]
-        if k <= 0:
-            return 1
-        elif sum(self.a[ix:]) < k:
-            return 0
-        elif ix == len(self.a) - 1:
-            if k < pod:
-                return 0
-            else:
-                return self.p
-        a_1 = self.get_av(ix+1, k-pod, self.n-pod)
-        a_0 = self.get_av(ix+1, k, self.n-pod)
-        self.av_del[ix] = (a_1 - a_0)
-        av = self.p*a_1 + (1-self.p)*a_0
+        av = get_av(self.a, 0, k, self.p)
         return av
 
 
@@ -92,6 +75,7 @@ class VmssPerf():
             arr = ast.literal_eval(kk)
             sys = Sys(arr, self.p_rack)
             av1 = sys.get_av(self.vmss_size//2+1, self.vmss_size)
+            #print(str(av1) +"," + kk +","+ str(sys.p))
             av += av1*prcnt
         return av
 
@@ -102,4 +86,3 @@ def tst(vmss_size=5, p_rack=.99998):
     vmss_av = vp.get_sys_characteristics()
     print(vmss_av)
     print(vp.aa)
-
