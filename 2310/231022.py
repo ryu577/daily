@@ -71,4 +71,3 @@ def order_stats_time(o=80, n=40):
         summ += 1/term
         term -= 1
     return summ
-
