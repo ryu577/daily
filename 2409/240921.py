@@ -18,23 +18,44 @@ gg = grd.Grid(end=end1,
 gg.draw(draw, width=3)
 
 
-def drw(i, j, draw, txt=None):
-    x_crd = org[0]+i*scl+scl/2
+def rgb(minimum, maximum, value):
+    minimum, maximum = float(minimum), float(maximum)
+    ratio = 2 * (value-minimum) / (maximum - minimum)
+    b = int(max(0, 255*(1 - ratio)))
+    r = int(max(0, 255*(ratio - 1)))
+    g = 255 - b - r
+    return (r, g, b, 150)
+
+
+def drw(i, j, draw, txt=None, rgb=(0,102,255,150)):
+    # x_crd = org[0]+i*scl+scl/2
+    x_crd = org[0]+i*scl + 5
     y_crd = org[1]-scl*n+j*scl+scl/2
+    font = ImageFont.truetype("arial.ttf", 16)
     if txt is None:
         draw.text((x_crd, y_crd), "(" + str(i) + "," + str(j) + ")")
     else:
-        draw.text((x_crd, y_crd), txt)
+        draw.text((x_crd, y_crd), txt, font=font)
+    x_crd = org[0]+i*scl
+    y_crd = org[1]-scl*n+j*scl
+    draw.polygon([(x_crd, y_crd),
+                  (x_crd+scl, y_crd),
+                  (x_crd+scl, y_crd+scl),
+                  (x_crd, y_crd+scl)], rgb)
 
 
-# for i in range(n):
-#     for j in range(n):
-#         drw(i, j, draw)
+def tst(draw, n):
+    for i in range(n):
+        for j in range(n):
+            drw(i, j, draw)
+
 
 def matr_chain_order(p, draw):
+    """Based on 240512"""
     n = len(p) - 1
     m = np.zeros(shape=((n+1), (n+1)))
     s = np.zeros(shape=((n+1), (n+1)))
+    ixx = 0
     for l1 in range(2, n+1):
         for i in range(1, n-l1+1+1):
             j = i + l1 - 1
@@ -44,7 +65,9 @@ def matr_chain_order(p, draw):
                 if q < m[i, j]:
                     m[i, j] = q
                     s[i, j] = k
-            drw(i, j, draw, str(m[i, j]))
+            drw(j-1, i-1, draw, str(int(m[i, j])), rgb(2, n, l1))
+            im.save(".//" + "im" + str(ixx) + ".png")
+            ixx += 1
     return m, s
 
 
@@ -59,10 +82,10 @@ def print_opt_paren(s, i, j):
 
 
 p = [30, 35, 15, 5, 10, 20, 25]
+im = Image.new("RGB", (1024, 1024), (1, 1, 1))
+draw = ImageDraw.Draw(im, "RGBA")
+gg.draw(draw, width=3)
 mm, ss = matr_chain_order(p, draw)
-
-im.save(".//" + "im" + str(0) + ".png")
-
 
 ss = ss.astype(int)
 print(mm)
