@@ -50,7 +50,7 @@ def tst(draw, n):
             drw(i, j, draw)
 
 
-def matr_chain_order(p, draw):
+def matr_chain_order1(p, draw):
     """Based on 240512"""
     n = len(p) - 1
     m = np.zeros(shape=((n+1), (n+1)))
@@ -82,12 +82,14 @@ def print_opt_paren(s, i, j):
 
 
 p = [30, 35, 15, 5, 10, 20, 25]
+# p = [10, 15, 5, 8, 12]
 im = Image.new("RGB", (1024, 1024), (1, 1, 1))
 draw = ImageDraw.Draw(im, "RGBA")
 gg.draw(draw, width=3)
-mm, ss = matr_chain_order(p, draw)
+mm, ss = matr_chain_order1(p, draw)
 
 ss = ss.astype(int)
 print(mm)
 print(ss)
-print_opt_paren(ss, 1, 6)
+print_opt_paren(ss, 1, len(p)-1)
+
